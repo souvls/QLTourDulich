@@ -1,0 +1,142 @@
+
+
+
+    <!-- Package Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s" *ngIf="listItem.length > 0">
+                <h6 class="section-title bg-white text-center text-primary px-3">Thành công</h6>
+                <h1 class="mb-5">Đã tìm thấy bằng từ khóa "<a style="font-size: 30px; color: #f11237;">{{keyword}}</a>"</h1>
+            </div>
+            <div class="row g-4 justify-content-center"  *ngIf="istour === true">
+                 <!-- paginate: {itemsPerPage:20, currentPage: p -->
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" *ngFor="let item of listItem | paginate: {itemsPerPage:10, currentPage: p}">
+                        <div *ngIf="item && item.name">
+                        <div class="package-item">
+                            <div class="overflow-hidden">
+                                <img class="img-fluid" src="img/package-1.jpg" alt="">
+                            </div>
+                            <div class="d-flex border-bottom">
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{item.name}}</small>
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>Ngày bắt đầu: {{ item.startDate | date:'dd/MM/yyyy' }}<br>
+                                    Ngày kết thúc: {{ item.endDate | date:'dd/MM/yyyy' }}
+                                    </small>
+                                <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>{{item.participantsCount}}</small>
+                            </div>
+                            <div class="text-center p-4">
+                                <h3 class="mb-0">{{item.price | currency}}</h3>
+                                <div class="mb-3">
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                </div>
+                                <p>{{item.name}}</p>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
+                                    <a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <pagination-controls *ngIf="listItem.length > 0" (pageChange) ="p =  $event"></pagination-controls>
+                
+            </div>
+
+            <!-- nếu không thấy tour thì hiển thị địa điểm -->
+
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s" *ngIf="istour === false">
+                <h6 class="section-title bg-white text-center text-primary px-3">Địa điểm</h6>
+                <h1 class="mb-5">địa điểm được tìm thấy</h1>
+            </div>
+            <div class="row g-4 justify-content-center"  *ngIf="istour === false">
+                 <!-- paginate: {itemsPerPage:20, currentPage: p -->
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" *ngFor="let item of listItem | paginate: {itemsPerPage:10, currentPage: p}">
+                        <div *ngIf="item && item.name">
+                        <div class="package-item">
+                            <div class="overflow-hidden">
+                                <img class="img-fluid" src="img/package-1.jpg" alt="">
+                            </div>
+                            <div class="d-flex border-bottom">
+                                <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>tên {{item.name}}</small>
+                                <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>tỉnh {{item.province}}</small>
+                            </div>
+                            <div class="text-center p-4">
+                                <h3 class="mb-0">{{item.description}}</h3>
+                                <div class="mb-3">
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                </div>
+                                <p>{{item.name}}</p>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">khám phá</a>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <pagination-controls *ngIf="listItem.length > 0" (pageChange) ="p =  $event"></pagination-controls>
+                
+            </div>
+        </div>
+
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s" *ngIf="listItem.length == 0">
+            <h6 class="section-title bg-white text-center text-primary px-3">fail</h6>
+            <h1 class="mb-5">Không có kết quả bởi Từ khóa "<a style="font-size: 30px; color: #f11237;">{{keyword}}</a>" vui lòng tìm kiếm lại! </h1>
+        </div>
+    <!-- Package End -->
+
+
+
+    <!-- Process Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center pb-4 wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Process</h6>
+                <h1 class="mb-5">3 Easy Steps</h1>
+            </div>
+            <div class="row gy-5 gx-4 justify-content-center">
+                <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="position-relative border border-primary pt-5 pb-4 px-4">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                            <i class="fa fa-globe fa-3x text-white"></i>
+                        </div>
+                        <h5 class="mt-4">Choose A Destination</h5>
+                        <hr class="w-25 mx-auto bg-primary mb-1">
+                        <hr class="w-50 mx-auto bg-primary mt-0">
+                        <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam eos erat ipsum et lorem et sit sed stet lorem sit</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="position-relative border border-primary pt-5 pb-4 px-4">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                            <i class="fa fa-dollar-sign fa-3x text-white"></i>
+                        </div>
+                        <h5 class="mt-4">Pay Online</h5>
+                        <hr class="w-25 mx-auto bg-primary mb-1">
+                        <hr class="w-50 mx-auto bg-primary mt-0">
+                        <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam eos erat ipsum et lorem et sit sed stet lorem sit</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="position-relative border border-primary pt-5 pb-4 px-4">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                            <i class="fa fa-plane fa-3x text-white"></i>
+                        </div>
+                        <h5 class="mt-4">Fly Today</h5>
+                        <hr class="w-25 mx-auto bg-primary mb-1">
+                        <hr class="w-50 mx-auto bg-primary mt-0">
+                        <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam eos erat ipsum et lorem et sit sed stet lorem sit</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Process Start -->
+        
+

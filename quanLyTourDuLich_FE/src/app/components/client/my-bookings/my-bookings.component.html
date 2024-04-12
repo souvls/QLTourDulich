@@ -1,0 +1,50 @@
+<div class="mt-10 pt-10 min-h-screen" data-aos="fade-up">
+  <div class=" max-w-screen-lg container mx-auto">
+    <div class="text-center">
+      <h6 class="section-title bg-white text-center text-xl font-medium px-3">
+        Booking
+      </h6>
+      <h1 class="mb-3 text-xl">lịch sử Bookings</h1>
+    </div>
+    <div class="">
+      <div class="form-group">
+        <label for="search-text"> Tìm kiếm theo từ khóa </label>
+        <input type="email" class="form-control" id="search-text" aria-describedby="search-text"
+          [(ngModel)]="searchText" placeholder="nhập từ khóa" autofocus>
+      </div>
+      <div class="mt-10">
+        <table class="w-full">
+          <thead>
+            <tr class="bg-slate-400 py-2 rounded-lg overflow-hidden">
+              <th>id </th>
+              <th>Tên khách hàng đặt</th>
+              <th>ngày đặt</th>
+              <th>trạn thái</th>
+              <th>danh sách tour đặt</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="
+                let Review of listMyBookings | searchFilter: searchText
+                  | paginate : { itemsPerPage: 9, currentPage: p };
+              ">
+              <td>{{ Review.id }}</td>
+              <td>{{ Review.customerName }}</td>
+              <td>{{ Review.bookingDate }}</td>
+              <td>{{ Review.status }}</td>
+              <td>
+                <div *ngFor="let item of Review.tours; let i = index">
+                  <p>tên tour thứ {{i+1}}: {{item.name}}</p>
+                </div>
+              </td>
+              <td *ngIf="Review.tours?.name == null"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="listMyBookings.length > 0">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+ng new QuanLyTourDuLich_FE --no-standalone
+npm install @fortawesome/angular-fontawesome --save
+npm install @ng-bootstrap/ng-bootstrap --save
+npm install primeng --save
+npm install @angular/material
+npm install @canvasjs/angular-charts
+npm install ngx-pagination --save
+npm install @types/sockjs-client --save-dev
+npm install @types/stompjs --save-dev

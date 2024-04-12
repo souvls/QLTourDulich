@@ -1,0 +1,141 @@
+<!-- chi tiết tour -->
+
+<div class="container">
+  <section class="tour-detail">
+    <div class="tour-info">
+      <h2>{{ tour?.name }}</h2>
+      <p><strong>mã tour: </strong> {{ tour?.id }}</p>
+      <p><strong>địa điểm: </strong> {{ tour?.destinations.name }}</p>
+      <p>
+        <strong>mô tả địa điểm: </strong> {{ tour?.destinations.describe }}
+      </p>
+      <p><strong>tỉnh: </strong> {{ tour?.destinations.province }}</p>
+      <p><strong>Thời gian khởi hành: </strong>ngày {{ tour?.startDate | date: 'dd/MM/yyyy' }} - {{ tour?.startDate | date: 'HH:mm' }} phút</p>
+      <p><strong>Thời gian kết thúc: </strong>ngày {{ tour?.endDate | date: 'dd/MM/yyyy' }} - {{ tour?.endDate | date: 'HH:mm' }} phút</p>
+      
+      
+      <p>
+        <strong>Thời gian: </strong> {{ getDuration().days }} ngày
+        {{ getDuration().nights }} đêm
+      </p>
+      <p><strong>Giá: </strong> {{ tour?.price }}đ</p>
+      <p><strong>trạng thái: </strong> {{ tour?.status }}</p>
+      <p>
+        <strong>số người tham gia: </strong> {{ tour?.participantsCount }} người
+      </p>
+      <p>
+        <strong>Tổng đánh giá: </strong> <span
+        class="star"
+        *ngFor="let star of starsArray"
+        [ngClass]="{ filled: star < averageStars }"
+        style="font-size: 30px;"
+
+      >
+        ★
+      </span>
+      </p>
+      
+      <button>Đặt Ngay</button>
+      <button (click)="addToCart(tour)">thêm vào giỏ hàng</button>
+      <button (click)="addToWishList(tour)">thêm vào danh sách yêu thích</button>
+    </div>
+
+    <div class="image-slider">
+      <h1>Hình ảnh tour</h1>
+      <div class="feature-slider">
+        <div>
+          <img class="img-responsive" [src]="'data:image/' +  tour.images[0].type + ';base64,' +  tour.images[0].data" alt="Destination Image">
+        </div>
+        <div class="feature-slider" *ngFor="let image of tour.images.slice(1)">
+          <div>
+            <img  class="img-responsive" [src]="'data:image/' + image.type + ';base64,' + image.data" alt="Destination Image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- hết chi tiết tour -->
+
+<!-- tạo đánh giá  -->
+<div class="form-container">
+  <h2>hãy đánh giá Tour</h2>
+  <form action="/submit-review" method="post">
+    <div class="form-group">
+      <label for="name">Tên của bạn:</label>
+      <input
+        type="text"
+        id="name"
+        [(ngModel)]="reviewForm.yourName"
+        name="name"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="rating">Điểm đánh giá (1-5):</label>
+      <select
+        id="rating"
+        name="rating"
+        required
+        [(ngModel)]="reviewForm.selectedRating"
+      >
+        <option value="1">1 sao</option>
+        <option value="2">2 sao</option>
+        <option value="3">3 sao</option>
+        <option value="4">4 sao</option>
+        <option value="5">5 sao</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="description">Nhận xét:</label>
+      <textarea
+        id="description"
+        name="description"
+        rows="4"
+        required
+        [(ngModel)]="reviewForm.description"
+      ></textarea>
+    </div>
+    <!-- Bổ sung các trường ẩn cho tour_id và user_id -->
+    <input type="hidden" id="tour_id" name="tour_id" value="ID_CUA_TOUR" />
+    <input type="hidden" id="user_id" name="user_id" value="ID_CUA_USER" />
+
+    <div class="form-group">
+      <input
+        type="submit"
+        value="Gửi đánh giá"
+        class="submit-btn"
+        (click)="CreatReview()"
+      />
+    </div>
+  </form>
+</div>
+
+<!-- danh sách dánh giá tour -->
+<h2>các đánh giá cộng đồng</h2>
+<div style="border: 1px solid #000; padding: 10px; margin-bottom: 10px;">
+  <div *ngIf="reviewList">
+    <ul class="reviews" *ngFor="let review of reviewList">
+      <li class="review" *ngIf="review && review.name">
+        <div class="rating">
+          <span *ngFor="let i of getRatingStars(review.rating)">&#9733;</span>
+          <span *ngFor="let i of getEmptyStars(review.rating)">&#9734;</span>
+        </div>
+        <div class="comment">
+          <p>Thầy   <a style="font-size: 15px; font-weight: bold; color: #00eef7; text-decoration: underline;">{{ transformName(review.name)}}</a>   đã đánh giá</p>
+        </div>
+        <div class="comment">
+          <p>{{ review.description }}</p>
+        </div>
+      </li>
+      <!-- Thêm các mục đánh giá khác tại đây -->
+    </ul>
+  </div>
+  <div  *ngIf="!reviewList">
+    <h1 style="color: #00eef7;">chưa có đánh giá nào cho chuyển tour này</h1>
+  </div>
+</div>
+
+
+
+<!-- hết chi tiết Tour -->

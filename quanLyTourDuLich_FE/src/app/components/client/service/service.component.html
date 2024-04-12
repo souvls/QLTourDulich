@@ -1,0 +1,31 @@
+<div class="mt-10 pt-10">
+    <div class=" max-w-screen-lg container mx-auto">
+        <div class="text-center">
+            <h6 class="section-title bg-white text-center text-xl font-medium px-3">
+                Services
+            </h6>
+            <h1 class="mb-3 text-xl">Dịch vụ của chúng tôi</h1>
+        </div>
+        <div class=" grid grid-cols-4 gap-4">
+            <div class="" *ngFor="let item of listService | paginate: {itemsPerPage:8, currentPage: p}">
+                <div class="">
+                    <div class="px-3 py-5  bg-white shadow-lg rounded-lg border hover:bg-green-500 hover:text-white"
+                        routerLink="/service/{{item.id}}" style="height: 200px;">
+                        <div class="flex justify-center">
+                            <i class="fa fa-3x fa-globe"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-bold text-center text-lg pb-3">{{item.name}}</h5>
+                        </div>
+                        <div>
+                            <p>Mô tả: {{item.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5 flex justify-center items-center">
+            <pagination-controls (pageChange)="p =  $event"></pagination-controls>
+        </div>
+    </div>
+</div>

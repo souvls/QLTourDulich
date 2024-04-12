@@ -1,0 +1,2 @@
+**frontEnd khi mở project lên thì sao chép cài đặt các modul được sắp xếp sẵn trong file "cài đặt môi trường thư viện FE.txt" và thiết lập modul đã bị xoá trước đó của project
+**backEnd khi mở project lên config lại đường dẫn Mysql cho đúng tên database và insert dữ liệu từ file "data_insert.txt" hoặc file backup "data.sql"

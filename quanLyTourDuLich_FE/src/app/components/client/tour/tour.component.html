@@ -1,0 +1,76 @@
+<div class="mt-10 pt-10" data-aos="fade-up">
+  <div class=" max-w-screen-lg container mx-auto">
+    <div class="text-center">
+      <h6 class="section-title bg-white text-center text-xl font-medium px-3">
+        Danh sách tour
+      </h6>
+      <h1 class="mb-3 text-xl">Top gói tour</h1>
+    </div>
+    <div class=" grid grid-cols-4 gap-4">
+      <div class="" *ngFor="let item of listTour | paginate : { itemsPerPage: 4, currentPage: p }">
+        <div class=" relative">
+          <a class=" block h-500px rounded-lg shadow-lg border bg-white overflow-hidden hover:bg-orange-500 hover:text-white hover:duration-75"
+            style="height: 450px;" routerLink="/tour/destinations/{{ item.id }}">
+            <div class="w-full overflow-hidden" style="height: 200px;">
+              <div *ngIf="item.images.length > 0">
+                <img class="img-fluid rounded-lg"
+                  [src]="'data:image/' + item.images[0]?.type+ ';base64,' + item.images[0]?.data" width="100%">
+              </div>
+              <div *ngIf="item.images.length === 0">
+                <img alt="noimg" class="rounded-lg" src="assets/img/noIMG.jpg" width="100%" />
+              </div>
+            </div>
+            <div class="px-2 flex flex-col items-start">
+              <small class="">
+                <i class="fa fa-map-marker-alt text-primary"></i>
+                {{ item.destinations.name }} {{ item.destinations.province }}
+              </small>
+              <span class="text-lg font-bold">{{ item.name }}</span>
+              <div class="flex items-center gap-2">
+                <div class="mb-3 text-yellow-400">
+                  <small class="fa fa-star text-primary"></small>
+                  <small class="fa fa-star text-primary"></small>
+                  <small class="fa fa-star text-primary"></small>
+                  <small class="fa fa-star text-primary"></small>
+                  <small class="fa fa-star text-primary"></small>
+                </div>
+                <div>
+                  <small class="">
+                    <i class="fa fa-user"></i>{{item.participantsCount }} người đã đặt
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="ps-3 flex justify-start items-center text-sm">
+              <div>
+                <i class="fa fa-calendar-alt text-primary me-2"></i>
+              </div>
+              <div class="flex flex-col">
+                <span>Ngày bắt đầu: {{ item.startDate | date : "dd/MM/yyyy" }}</span>
+                <span>Ngày kết thúc: {{ item.endDate | date : "dd/MM/yyyy" }}</span>
+              </div>
+            </div>
+            <div class="text-center mt-2">
+              <h3 class="mb-0">{{ item.price | currency }}</h3>
+            </div>
+          </a>
+          <div class="w-full absolute bottom-2">
+            <ul class=" flex justify-between p-2">
+              <li>
+                <a href="javascript:void(0)" class=" px-4 py-2" (click)="addToWishList(item)"><fa-icon
+                    [icon]="heart"></fa-icon></a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" class="bg-green-400 text-white shadow-lg rounded-lg px-4 py-2"
+                  (click)="addToCart(item)">thêm vô giỏ hàng</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 py-2 shadow-lg rounded-lg flex justify-center items-center">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+</div>

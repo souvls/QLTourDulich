@@ -1,0 +1,177 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.tour-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 70%;
+}
+
+.tour-info {
+    width: 60%;
+}
+
+.tour-info h2 {
+    margin-bottom: 10px;
+}
+
+.tour-info img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.image-slider {
+    width: 40%;
+}
+
+.feature-slider {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.feature-slider div {
+    flex: 0 0 calc(50% - 10px);
+}
+
+.feature-slider img {
+    width: 100%;
+    height: auto;
+}
+
+
+
+/* CSS */
+/* Phần viết đánh giá */
+.form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: calc(100% - 10px);
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(0, 0, 0, 0.54)" d="M7 10l5 5 5-5z"/></svg>') no-repeat;
+    background-position: right 8px top 50%;
+    background-size: 16px;
+  }
+  
+  .submit-btn {
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  /* Phần danh sách đánh giá */
+  .reviews {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .review {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .review .rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .review .rating span {
+    font-size: 20px;
+    color: #ffcc00;
+    margin-right: 5px;
+  }
+  
+  .review .comment {
+    margin-top: 5px;
+    color: #333;
+  }
+  
+
+
+
+/* CSS */
+.rating {
+    font-size: 24px;
+  }
+  
+  .stars {
+    color: gold;
+    display: inline-block;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+  }
+  
+  .stars::before {
+    content: '★★★★★';
+  }
+  
+  .stars::after {
+    content: '★★★★★';
+    color: lightgrey;
+    position: absolute;
+    left: 0;
+  }
+  
+
+
+
+
+/* Màu mặc định của ngôi sao */
+.star-rating {
+  font-size: 24px; /* Cỡ chữ của sao */
+}
+
+.star {
+  color: #ccc; /* Màu của sao không được chọn */
+  transition: color 0.2s; /* Thêm transition để tạo hiệu ứng chuyển đổi màu */
+}
+
+.star.filled {
+  color: rgb(28, 241, 0); /* Màu của sao đã chọn */
+}

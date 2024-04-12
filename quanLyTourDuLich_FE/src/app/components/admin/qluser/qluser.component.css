@@ -1,0 +1,116 @@
+/* CSS cho form điền thông tin */
+.tour-details {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .field {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="number"] {
+    width: calc(100% - 10px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Dropdown */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown input[type="text"] {
+    width: calc(100% - 30px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* .dropdown button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 8px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+  } */
+  ul{
+    position: relative;
+    left: -500px;
+    width: 1500px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #fff;
+    padding: 10px;
+  }
+  ul li button {
+    padding: 0px 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 12px; /* Thay đổi padding theo ý muốn */
+    margin-bottom: 5px; /* Thêm khoảng cách giữa các mục */
+    cursor: pointer;
+  }
+  
+  ul li button:hover {
+    background-color: #eaeaea;
+  }
+  
+  
+
+
+
+
+
+
+
+
+  .field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.button-container button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-container button:first-child {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.button-container button:nth-child(2) {
+  background-color: #2ecc71;
+  color: #fff;
+}
+
+.button-container button:last-child {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.button-container button:hover {
+  opacity: 0.8;
+}

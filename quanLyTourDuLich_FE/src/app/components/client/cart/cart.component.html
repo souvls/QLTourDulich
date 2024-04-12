@@ -1,0 +1,166 @@
+<div class="mt-10 pt-10" data-aos="fade-up">
+  <div class=" max-w-screen-lg container mx-auto">
+    <div class="text-center">
+      <h6 class="section-title bg-white text-center text-xl font-medium px-3">
+        Shopping Cart
+      </h6>
+    </div>
+    <div class="w-full pt-5">
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full table-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr class="text-center">
+              <th scope="col" class="px-6 py-3">
+                Tour
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Giá
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Số lượng
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Dịch vụ
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Tổng giá
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Xóa
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of cartService.items"
+              class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <div class="flex justify-center">
+                  <img class="img-fluid rounded-lg" alt="Tour cover"
+                    [src]="'data:image/' + product.images[0]?.type+ ';base64,' + product.images[0]?.data" width="80px">
+                </div>
+                <h5 class="text-center">{{ product.name }}</h5>
+              </th>
+              <td class="px-6 py-4">
+                {{ product.price.toLocaleString()}} VND
+              </td>
+              <td class="px-6 py-4">
+                <div class=" flex justify-center items-center gap-3">
+                  <span class="bg-black p-2 rounded-xl text-white hover:shadow-lg hover:bg-slate-800"
+                    (click)="subtractQuantity(product)">-</span>
+                  <input class="rounded-lg w-20 text-center" type="text" [ngModel]="product.quantity"
+                    (change)="updateQuantity(product, $event)" min="1" />
+                  <span class="bg-black p-2 rounded-xl text-white hover:shadow-lg hover:bg-slate-800"
+                    (click)="plusQuantity(product)">+</span>
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <div>
+                  <button (click)="toggleServiceForm(product)" (click)="getAllServiceInTourById(product.id)">
+                    Chọn dịch vụ
+                  </button>
+
+                  <h4 class="ds_dic_hvu_da_chon">các dịch vụ có thể đi kèm với tour</h4>
+                  <div *ngIf="product.showServiceForm">
+                    <div *ngFor="let service of services">
+                      <button class="service-button" routerLink="/service/{{service.id}}">
+                        {{ service.name }}
+                      </button>
+
+                      <span class="inc qtybtn bg-black p-2"
+                        (click)="addServiceToProduct(product, service, $event); $event.stopPropagation()">
+                        +
+                      </span>
+
+                    </div>
+                  </div>
+                  <ng-container *ngIf="(cartService.getServicesForTour(product.id) | async) as services">
+                    <ng-container *ngIf="services.length > 0; else noSelectedServices">
+                      <h4 class="ds_dic_hvu_da_chon">Danh sách dịch vụ đã chọn</h4>
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>STT</th>
+                            <th>Tên Dịch Vụ</th>
+                            <th>Giá</th>
+                            <th>Thao Tác</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let service of services; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ service.name }}</td>
+                            <td>{{ service.price }}</td>
+                            <td>
+                              <button pButton pRipple type="button" icon="pi pi-times"
+                                class="p-button-rounded p-button-danger p-button-text"
+                                (click)="removeServiceFromTour(product.id, service)"></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </ng-container>
+                  </ng-container>
+                  <ng-template #noSelectedServices>
+                    <p>Không có dịch vụ đã chọn</p>
+                  </ng-template>
+                  
+                  <ng-template #noSelectedServices>
+                    <p>Vui lòng chọn dịch vụ</p>
+                  </ng-template>
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                {{ product.subTotal.toLocaleString()}} VND
+              </td>
+              <td class="px-6 py-4">
+                <button (click)="removeFromCart(product)"><i class="fa-solid fa-trash-can text-red-500"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="w-full mt-10 flex justify-between">
+        <div class="w-full ">
+          <a href="javascript:void(0)" routerLink="/"
+            class="bg-slate-700 px-3 py-2 rounded-lg text-white hover:bg-slate-500"> <i
+              class="fa-solid fa-arrow-left"></i> Tiếp tục lựa tour</a>
+        </div>
+        <div class="w-full flex justify-start">
+          <div class="w-full">
+            <div class="w-full border-b-2 pb-2">
+              <h5>Mã giảm giá</h5>
+              <form class="w-full flex items-center" action="#">
+                <input type="text" class="rounded-lg w-80" placeholder="hãy nhập mã giảm giá của bạn nếu có" />
+                <button type="submit"
+                  class="ms-2 bg-gradient-to-r from-yellow-300 to-orange-400 px-3 py-2 rounded-lg text-white">Áp
+                  dụng</button>
+              </form>
+            </div>
+            <div class="w-full mt-2">
+              <p class="text-lg font-medium">phiếu của giỏ hàng</p>
+              <table class="ms-auto" style="width: 70%;">
+                <tr class="">
+                  <td><span>tổng giá giỏ hàng</span></td>
+                  <td><span class="text-xl font-medium">{{ cartService.totalPrice.toLocaleString()}} VND</span></td>
+                </tr>
+                <tr class="">
+                  <td><span>giảm giá</span></td>
+                  <td><span class="text-xl font-medium">0%</span></td>
+                </tr>
+                <tr class="">
+                  <td><span>tổng giá phiếu</span></td>
+                  <td><span class="text-2xl font-medium text-green-500">{{ cartService.total.toLocaleString()}}
+                      VND</span></td>
+                </tr>
+              </table>
+            </div>
+            <div class="w-full mt-5 px-5">
+              <a class="block px-3 py-2 text-white text-lg rounded-lg text-center bg-gradient-to-r from-blue-500 to-blue-950" routerLink="/booktour">tiếp tục đặt hàng</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

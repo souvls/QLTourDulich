@@ -1,0 +1,19 @@
+/* Định dạng kích thước hình ảnh sản phẩm */
+.featured__item__pic {
+    position: relative;
+    overflow: hidden;
+    max-height: 250px; /* Điều chỉnh chiều cao tối đa cho hình ảnh sản phẩm */
+}
+
+/* Định dạng các phần tử sidebar */
+.sidebar {
+    padding: 20px;
+    background-color: #f5f5f5;
+    /* Thêm các thuộc tính khác tùy thuộc vào thiết kế bạn muốn */
+}
+
+/* Định dạng các phần tử breadcrumb */
+.breadcrumb__text {
+    padding: 50px 0;
+    /* Thêm các thuộc tính khác tùy thuộc vào thiết kế bạn muốn */
+}

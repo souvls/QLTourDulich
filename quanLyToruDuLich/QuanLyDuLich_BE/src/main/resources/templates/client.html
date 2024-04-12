@@ -1,0 +1,188 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css' />
+	<style>
+		/* Your existing CSS styles */
+		/* ... */
+
+		/* Additional styles for email */
+
+		/* Set body styles */
+		body {
+			font-family: 'Roboto', sans-serif;
+			font-size: 16px;
+			line-height: 1.6;
+			color: #333;
+			margin: 0;
+			padding: 0;
+			background-color: #f4f4f4;
+		}
+
+		/* Set container styles */
+		.container {
+			width: 50%;
+			margin: 50px auto;
+			padding: 20px;
+			background-color: #fff;
+			border-radius: 8px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		/* Set header styles */
+		.header {
+			text-align: center;
+			margin-bottom: 20px;
+			color: #ff5733;
+		}
+
+		/* Set content styles */
+		.content {
+			margin-bottom: 20px;
+		}
+
+		/* Set button styles */
+		.button {
+			display: inline-block;
+			padding: 10px 20px;
+			background-color: #3498db;
+			color: #fff;
+			text-decoration: none;
+			border-radius: 5px;
+			transition: background-color 0.3s;
+		}
+
+		.button:hover {
+			background-color: #2980b9;
+		}
+
+		/* Set footer styles */
+		.footer {
+			text-align: center;
+			font-size: 14px;
+			color: #888;
+		}
+
+		/* Set paragraph styles */
+		p {
+			color: #666;
+			margin-bottom: 10px;
+		}
+
+		/* Set heading styles */
+		h1 {
+			color: #333;
+			font-size: 24px;
+			margin-bottom: 20px;
+		}
+
+		/* Table styles */
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-bottom: 20px;
+		}
+
+		table th,
+		table td {
+			border: 1px solid #ddd;
+			padding: 8px;
+		}
+
+		table th {
+			background-color: #f2f2f2;
+			font-weight: bold;
+		}
+
+		table tbody tr:nth-child(even) {
+			background-color: #f9f9f9;
+		}
+
+		table tbody tr:hover {
+			background-color: #f2f2f2;
+		}
+
+		table th,
+		table td {
+			overflow: hidden;
+			/* hoặc overflow: ellipsis; */
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="header">
+			<h1>Xác nhận thanh toán</h1>
+		</div>
+		<div class="content">
+			<p>Xin chào, <span th:text="${name}"></span>!</p>
+			<p>Chúng tôi đã nhận được đơn đặt tour của bạn và cần xác nhận thanh toán</p>
+			<p>Thông tin đơn đặt tour:</p>
+
+			<table>
+				<thead>
+					<tr>
+						<th class="shoping__product">Tour</th>
+						<th>Giá</th>
+						<th>số lượng</th>
+						<th>dịch vụ</th>
+						<th>tổng giá</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="order, orderStat : ${listCart}">
+						<td th:text="${order.name}"></td>
+						<td th:text="${order.price}"></td>
+						<td th:text="${order.quantity}"></td>
+						<td>
+							<div th:if="${order.services}">
+								<table>
+									<thead>
+										<tr>
+											<th>STT</th>
+											<th>Tên Dịch Vụ</th>
+											<th>Giá</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="service, serviceStat : ${order.services}">
+											<td th:text="${serviceStat.index + 1}"></td>
+											<td th:text="${service.name}"></td>
+											<td th:text="${service.price}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<p th:unless="${order.services}">Không có dịch vụ đi kèm</p>
+						</td>
+						<td th:text="${order.subTotal}"></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h5>phiếu của giỏ hàng</h5>
+			<ul>
+				<li>
+					Tổng giá phiếu <span th:text="${total}"></span> đồng
+				</li>
+				<li>
+					Mã code thanh toán của bạn là, hãy ghi nội dung thanh toán kèm với mã này: <span th:text="${code}"></span>
+				</li>
+			</ul>
+
+			<p>Vui lòng xác nhận thanh toán bằng cách nhấn nút dưới đây:</p>
+			<a class="button" th:href="@{'http://localhost:4200/#/payment/'+ ${code}}">Xác nhận thanh toán</a>
+		</div>
+		<div class="footer">
+			<p>Đây là email tự động, vui lòng không trả lời.</p>
+			<p>QUẢN LÝ TOUR DU LỊCH BY Tình</p>
+		</div>
+	</div>
+</body>
+
+</html>

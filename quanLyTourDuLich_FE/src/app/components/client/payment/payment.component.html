@@ -1,0 +1,218 @@
+
+
+<!-- Booking Start -->
+<section class="shoping-cart spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="shoping__cart__table">
+          <table>
+            <thead>
+              <tr>
+                <th class="shoping__product">Tour</th>
+                <th>Giá</th>
+                <th>số lượng</th>
+                <th>dịch vụ</th>
+                <th>tổng giá</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of cartService.items">
+                <td class="shoping__cart__item">
+                  <img src="" alt="" width="100px" />
+                  <h5>{{ product.name }}</h5>
+                </td>
+                <td class="shoping__cart__price">
+                  {{ product.price | currency }}
+                </td>
+                <td class="shoping__cart__quantity">
+                  <div class="quantity">
+                    <div class="pro-qty">
+                      <input
+                        type="text"
+                        [ngModel]="product.quantity"
+                        (change)="updateQuantity(product, $event)"
+                        min="1"
+                      />
+                    </div>
+                  </div>
+                </td>
+                
+                <td class="shoping__cart__item__close">
+                  <ng-container *ngIf="(cartService.getServicesForTour(product.id) | async) as services">
+                    <ng-container *ngIf="services.length > 0; else noServices">
+                      <h4 class="ds_dic_hvu_da_chon">Danh sách dịch vụ đã chọn</h4>
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>STT</th>
+                            <th>Tên Dịch Vụ</th>
+                            <th>Giá</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let service of services; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ service.name }}</td>
+                            <td>{{ service.price }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </ng-container>
+                    <ng-template #noServices>
+                      <p>Không có dịch vụ đi kèm</p>
+                    </ng-template>
+                  </ng-container>
+                </td>
+                
+
+                <td class="shoping__cart__total">
+                  {{ product.subTotal | currency }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <h1>CHI TIẾT GIỎ HÀNG ĐÃ ĐẶT</h1>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="shoping__continue">
+          <div class="shoping__discount">
+            <h5>Mã giảm giá</h5>
+            <form action="#">
+              <input
+                type="text"
+                placeholder="hãy nhập mã giảm giá của bạn nếu có"
+              />
+              <button type="submit" class="site-btn">Áp dụng</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="shoping__checkout">
+          <h5>phiếu của giỏ hàng</h5>
+          <ul>
+            <li>
+              tổng giá giỏ hàng
+              <span>{{ cartService.totalPrice | currency }}</span>
+            </li>
+            <li>giảm giá <span>- 0%</span></li>
+            <li>
+              tổng giá phiếu  <span>{{ cartService.total | currency }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--end chi tiết trong đơn đặt hàng có gì -->
+
+<!-- thông tin tài khoản thanh toán momo -->
+
+<div class="container-xxl py-5">
+  <!-- Thanh toán Momo -->
+  <div class="payment-container">
+    <div class="info-container">
+      <div class="momo-info">
+        <h2>Thông tin tài khoản Momo nhận tiền thanh toán</h2>
+        <p>!Vui lòng gửi vào Momo và điền mã code sau vào nội dung giao dịch:</p>
+        <div class="transaction-code">
+          <h1>code:</h1>
+          <h1 class="code-value">{{ keyword }}</h1>
+        </div>
+        <div class="momo-details">
+          <p><strong>Số điện thoại:</strong> 0982104744</p>
+          <p><strong>Email:</strong> tinhkikhoat&#64;gmail.com</p>
+        </div>
+      </div>
+    </div>
+    <div><h1>Mã QR thanh toán của bạn</h1>
+      <p>!Vui lòng mở momo và quét theo mã QR dưới đây:</p>
+      <img [src]="getQrCodeUrl()" alt="QR Code">
+    </div>
+  </div>
+</div>
+  
+
+  <!--end thanh toán momo -->
+
+  <!-- Process Start -->
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="text-center pb-4 wow fadeInUp" data-wow-delay="0.1s">
+        <h6 class="section-title bg-white text-center text-primary px-3">
+          Process
+        </h6>
+        <h1 class="mb-5">3 Easy Steps</h1>
+      </div>
+      <div class="row gy-5 gx-4 justify-content-center">
+        <div
+          class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp"
+          data-wow-delay="0.1s"
+        >
+          <div class="position-relative border border-primary pt-5 pb-4 px-4">
+            <div
+              class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow"
+              style="width: 100px; height: 100px"
+            >
+              <i class="fa fa-globe fa-3x text-white"></i>
+            </div>
+            <h5 class="mt-4">Choose A Destination</h5>
+            <hr class="w-25 mx-auto bg-primary mb-1" />
+            <hr class="w-50 mx-auto bg-primary mt-0" />
+            <p class="mb-0">
+              Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam
+              eos erat ipsum et lorem et sit sed stet lorem sit
+            </p>
+          </div>
+        </div>
+        <div
+          class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp"
+          data-wow-delay="0.3s"
+        >
+          <div class="position-relative border border-primary pt-5 pb-4 px-4">
+            <div
+              class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow"
+              style="width: 100px; height: 100px"
+            >
+              <i class="fa fa-dollar-sign fa-3x text-white"></i>
+            </div>
+            <h5 class="mt-4">Pay Online</h5>
+            <hr class="w-25 mx-auto bg-primary mb-1" />
+            <hr class="w-50 mx-auto bg-primary mt-0" />
+            <p class="mb-0">
+              Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam
+              eos erat ipsum et lorem et sit sed stet lorem sit
+            </p>
+          </div>
+        </div>
+        <div
+          class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp"
+          data-wow-delay="0.5s"
+        >
+          <div class="position-relative border border-primary pt-5 pb-4 px-4">
+            <div
+              class="d-inline-flex align-items-center justify-content-center bg-primary rounded-circle position-absolute top-0 start-50 translate-middle shadow"
+              style="width: 100px; height: 100px"
+            >
+              <i class="fa fa-plane fa-3x text-white"></i>
+            </div>
+            <h5 class="mt-4">Fly Today</h5>
+            <hr class="w-25 mx-auto bg-primary mb-1" />
+            <hr class="w-50 mx-auto bg-primary mt-0" />
+            <p class="mb-0">
+              Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam
+              eos erat ipsum et lorem et sit sed stet lorem sit
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Process Start -->
+

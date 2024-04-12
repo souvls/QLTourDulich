@@ -1,0 +1,162 @@
+
+
+
+
+<h1>danh sách quan lý điểm đến</h1>
+<div class="table-container">
+    <div class="form-group">
+        <label for="search-text"> Tìm kiếm theo từ khóa </label>
+        <input type="email" class="form-control" id="search-text" aria-describedby="search-text" 
+          [(ngModel)]="searchText" placeholder="nhập từ khóa" 
+          autofocus>
+      </div>
+    <div class="table-responsive">
+        <table class="table custom-table m-0">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Miêu tả điểm đến</th>
+                    <th>Tên điểm đến</th>
+                    <th>Tỉnh, xã điểm đến</th>
+                    <th>Hình ảnh</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr>
+                    <td>&nbsp;</td>
+                    <td>74%<br><small>of Total:<br>80.00% (10)</small></td>
+                    <td>57%<br><small>Avg for View:<br>90.00% (-16.67%)</small></td>
+                    <td>32%<br><small>Avg for View:<br>50.00% (70.00%)</small></td>
+                    <td>35.32<br><small>Avg for View:<br>2.70 (75.93%)</small></td>
+                    <td>79<br><small>Avg for View:<br>0.00% (0.00%)</small></td>
+                    <td>&nbsp;</td>
+                </tr> -->
+                <tr *ngFor="let Destination of listDestination | searchFilter: searchText  | paginate : { itemsPerPage: 9, currentPage: p }">
+                    <td>{{Destination.id}}</td>
+                    <td>{{Destination.describe}}</td>
+                    <td>{{Destination.name}}</td>
+                    <td>{{Destination.province}}</td>
+                    <td *ngIf="Destination.image"><img src="{{'data:image/jpg;base64,' + Destination.image.data}}" alt="" class="w-full h-full"></td>
+                    <td *ngIf="!Destination.image"></td>
+                    <td>
+                        <div class="td-actions">
+                            <a class="icon red" data-toggle="tooltip" data-placement="top" title="Add Row" (click)="openNew()">
+                                <i class="icon-circle-with-plus"></i>
+                            </a>
+                            <a class="icon green" data-toggle="tooltip" data-placement="top" title="Save Row" (click)="openUpdate(Destination)">
+                                <i class="icon-save"></i>
+                            </a>
+                            <a class="icon blue" data-toggle="tooltip" data-placement="top" title="Delete Row" (click)="ondelete(Destination)">
+                                <i class="icon-cancel"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+</div>
+
+
+<!-- show các fomr  -->
+
+
+
+
+
+<!-- form điền thông tin -->
+<div class="tour-details" *ngIf="showForm">
+    <div class="field">
+      <label for="name">Name</label>
+      <input type="text" id="name" [(ngModel)]="DestinationForm.name" required autofocus />
+    </div>
+  
+    
+    <div class="field">
+      <label for="status">Status</label>
+      <textarea id="status" [(ngModel)]="DestinationForm.describe" required></textarea>
+    </div>
+
+    <div class="field">
+        <label for="status">Status</label>
+        <textarea id="status" [(ngModel)]="DestinationForm.province" required></textarea>
+      </div>
+      
+    
+   <button pButton type="button" class="p-button-success w-auto" (click)="onChooseImage()">Chọn ảnh</button>
+
+  
+    <div class="field">
+      <button (click)="createDestination()" type="submit" *ngIf="!onUpdate" >Tạo Destination mới</button>
+      <button type="submit" *ngIf="onUpdate" (click)="updateTour()">cập nhật Destination</button>
+      <button type="button" class="cancel-button" (click)="openNew()">thoát</button>
+    </div>
+  </div>
+  <!-- end form điền thông tin -->
+
+
+
+  <!-- file ảnh -->
+  <div class="field">
+    <div class="custom-dialog" *ngIf="showImage">
+        <div class="dialog-header">
+            <h3>Chọn ảnh</h3>
+        </div>
+        <div class="dialog-content">
+            <div class="flex justify-content-between">
+                <div>
+                    <input type="file" #file (change)="uploadFile($event)" hidden>
+                    <button (click)="file.click()" class="custom-button warning w-auto">Tải ảnh lên</button>
+                </div>
+                <div>
+                    <button (click)="chooseImage()" class="custom-button primary w-auto" [disabled]="disabled">Chọn ảnh</button>
+                    <button class="custom-button danger ml-2 w-auto" [disabled]="disabled">Xóa ảnh</button>
+                </div>
+            </div>
+            <hr align="left">
+            <div class="grid">
+                <div class="col-4 list-image flex align-items-center" *ngFor="let image of listImage">
+                    <img [src]="'data:image/jpg;base64,' + image.data" alt="" class="w-full h-full p-2 border-1" (click)="selectImage($event,image)">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="grid mt-1" *ngIf="listImageChoosen != null" style="display: flex; flex-direction: column;">
+        <h1>Danh sách ảnh đã chọn</h1>
+        <div style="width: 100%; display: flex;">
+            <div class="tour-image col-2 flex align-items-center" *ngFor="let image of listImageChoosen" style="display: flex; justify-content: center; align-items: center; width: 250px; height: 200px;">
+                <img src="{{'data:image/jpg;base64,' + image.data}}" alt="" class="w-full h-full">
+                <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text delete-image" (click)="deleteImage(image)"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end file ảnh -->
+
+
+
+<p-dialog 
+    header="Xác nhận" 
+    [(visible)]="showDelete" 
+    [style]="{ 
+        width: '30vw', 
+        'border-radius': '8px', 
+        'box-shadow': '0 0 10px 0 rgba(0, 0, 0, 0.1)',
+        'background-color': '#333333',
+        'color': 'white'
+    }" 
+    [modal]="true" 
+    [transitionOptions]="'.3s'" 
+    [baseZIndex]="10000">
+    <div style="padding: 20px;">
+        <i class="pi pi pi-exclamation-triangle" style="font-size: 2rem;"></i>
+        <span  class="ml-2">Bạn có chắc xóa <span>{{ DestinationForm.name }}</span>?</span>
+    </div>
+    <div class="flex justify-content-end mt-3" style="padding: 10px 20px;">
+        <p-button label="Yes" icon="pi pi-check" class="mr-2" (click)="deleteTour()"></p-button>
+        <p-button label="No" icon="pi pi-times" (click)="showDelete=false"></p-button>
+    </div>
+</p-dialog>

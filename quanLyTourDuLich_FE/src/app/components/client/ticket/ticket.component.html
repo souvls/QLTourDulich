@@ -1,0 +1,49 @@
+<div class="mt-10 pt-10 min-h-screen" data-aos="fade-up">
+  <div class=" max-w-screen-lg container mx-auto">
+    <div class="text-center">
+      <h6 class="section-title bg-white text-center text-xl font-medium px-3">
+        Ticket
+      </h6>
+      <h1 class="mb-3 text-xl">vé lưu hành của bạn</h1>
+    </div>
+    <div class="table-container">
+      <div class="form-group">
+        <label for="search-text"> Tìm kiếm theo từ khóa </label>
+        <input type="email" class="form-control" id="search-text" aria-describedby="search-text"
+          [(ngModel)]="searchText" placeholder="nhập từ khóa" autofocus>
+      </div>
+      <div class="mt-10">
+        <table class="w-full">
+          <thead>
+            <tr class="bg-slate-400 py-2 rounded-lg overflow-hidden">
+              <th>id </th>
+              <th>Tên vé</th>
+              <th>số người có thể đi trong vé này</th>
+              <th>ngày bắt đầu</th>
+              <th>ngày kết thúc</th>
+              <th>mô tả</th>
+              <th>trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="
+              let Review of ListTicket | searchFilter: searchText
+                | paginate : { itemsPerPage: 9, currentPage: p };
+            ">
+              <td>{{ Review.id }}</td>
+              <td>{{ Review.name }}</td>
+              <td>{{ Review.participantsCount }}</td>
+              <td>{{ Review.startDate }}</td>
+              <td>{{ Review.endDate }}</td>
+              <td>{{ Review.description }}</td>
+              <td>{{ Review.status }}</td>
+              <td>
+          </tbody>
+        </table>
+        <div *ngIf="ListTicket.length > 0">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,211 @@
+<h1>danh sách quan lý dịch vụ</h1>
+<div class="table-container">
+    <div class="form-group">
+        <label for="search-text"> Tìm kiếm theo từ khóa </label>
+        <input type="email" class="form-control" id="search-text" aria-describedby="search-text" 
+          [(ngModel)]="searchText" placeholder="nhập từ khóa" 
+          autofocus>
+      </div>
+  <div class="table-responsive">
+    <table class="table custom-table m-0">
+      <thead>
+        <tr>
+          <th>id </th>
+          <th>Mô tả dịch vụ </th>
+          <th>Tên dịch vụ </th>
+          <th>Giá dịch vụ </th>
+          <th>Liên kết với id tour </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr>
+          <td>&nbsp;</td>
+          <td>
+            74%<br /><small>of Total:<br />80.00% (10)</small>
+          </td>
+          <td>
+            57%<br /><small>Avg for View:<br />90.00% (-16.67%)</small>
+          </td>
+          <td>
+            32%<br /><small>Avg for View:<br />50.00% (70.00%)</small>
+          </td>
+          <td>&nbsp;</td>
+        </tr> -->
+        <tr
+          *ngFor="
+            let service of listService | searchFilter: searchText
+              | paginate : { itemsPerPage: 9, currentPage: p };
+          "
+        >
+          <td>{{ service.id }}</td>
+          <td>{{ service.description }}</td>
+          <td>{{ service.name }}</td>
+          <td>{{ service.price }} VNĐ</td>
+          <td *ngIf="service.tour?.id != null">{{ service.tour?.id }}</td>
+          <td *ngIf="service.tour?.id == null"></td>
+          <td>
+            <div class="td-actions">
+              <a
+                class="icon red"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Add Row"
+                (click)="openNew()"
+              >
+                <i class="icon-circle-with-plus"></i>
+              </a>
+              <a
+                class="icon green"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Save Row"
+                (click)="openUpdate(service)"
+              >
+                <i class="icon-save"></i>
+              </a>
+              <a
+                class="icon blue"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Delete Row"
+                (click)="ondelete(service)"
+              >
+                <i class="icon-cancel"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
+
+<!-- show các fomr  -->
+
+<!-- form điền thông tin -->
+<div class="tour-details" *ngIf="showForm">
+  <div class="field">
+    <label for="name">Tên dịch vụ</label>
+    <input
+      type="text"
+      id="name"
+      [(ngModel)]="serviceForm.name"
+      required
+      autofocus
+    />
+  </div>
+
+  <div class="field">
+    <label for="name">Mô tả dich vụ</label>
+    <input
+      type="text"
+      id="name"
+      [(ngModel)]="serviceForm.description"
+      required
+      autofocus
+    />
+  </div>
+
+  <div class="field col">
+    <label for="price">Price</label>
+    <input type="number" id="price" [(ngModel)]="serviceForm.price" />
+  </div>
+
+  <!-- dropdown.component.html -->
+
+  <h3>Những tour đã chọn</h3>
+  <ul style="width: 100%; left: -0px; margin-bottom: 20px">
+    <li
+      *ngFor="let item of choosenListTour"
+      style="
+        margin-right: 10px;
+        border: 1px solid gray;
+        padding: 0px 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+      "
+      (click)="deleteTour(item)"
+    >
+      <p>
+        {{ item.name }}
+      </p>
+    </li>
+  </ul>
+  <div class="dropdown">
+    <h3>chọn tour cho dịch vụ</h3>
+    <input
+      id="inputValueFilter"
+      type="text"
+      placeholder="Tìm kiếm..."
+      [(ngModel)]="serviceForm.idtour"
+      (ngModelChange)="filterList($event)"
+    />
+    <button (click)="toggleDropdown()">▼</button>
+  </div>
+
+  <ul *ngIf="showDropdown">
+    <li *ngFor="let item of listTour">
+      <button (click)="selectTour(item); toggleDropdown()">
+        {{ item.name }}
+      </button>
+    </li>
+  </ul>
+
+  <ul *ngIf="showSearch">
+    <li *ngFor="let item of listTourFilter">
+      <button (click)="selectTour(item); toggleDropdown()">
+        {{ item.name }}
+      </button>
+    </li>
+  </ul>
+
+  <div class="field button-container">
+    <button (click)="createService()" type="submit" *ngIf="!onUpdate">
+      Tạo tour mới
+    </button>
+    <button type="submit" *ngIf="onUpdate" (click)="updateService()">
+      cập nhật tour
+    </button>
+    <button type="button" class="cancel-button" (click)="openNew()">
+      thoát
+    </button>
+  </div>
+</div>
+<!-- end form điền thông tin -->
+
+<p-dialog
+  header="Xác nhận"
+  [(visible)]="showFormDelete"
+  [style]="{
+    width: '30vw',
+    'border-radius': '8px',
+    'box-shadow': '0 0 10px 0 rgba(0, 0, 0, 0.1)',
+    'background-color': '#333333',
+    color: 'white'
+  }"
+  [modal]="true"
+  [transitionOptions]="'.3s'"
+  [baseZIndex]="10000"
+>
+  <div style="padding: 20px">
+    <i class="pi pi pi-exclamation-triangle" style="font-size: 2rem"></i>
+    <span class="ml-2"
+      >Bạn có chắc xóa <span>{{ serviceForm.name }}</span
+      >?</span
+    >
+  </div>
+  <div class="flex justify-content-end mt-3" style="padding: 10px 20px">
+    <p-button
+      label="Yes"
+      icon="pi pi-check"
+      class="mr-2"
+      (click)="deleteService()"
+    ></p-button>
+    <p-button
+      label="No"
+      icon="pi pi-times"
+      (click)="showFormDelete = false"
+    ></p-button>
+  </div>
+</p-dialog>

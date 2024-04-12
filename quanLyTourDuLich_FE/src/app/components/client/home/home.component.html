@@ -1,0 +1,262 @@
+<!-- Hero -->
+<div id="default-carousel" class="relative w-full" data-carousel="slide">
+  <!-- Carousel wrapper -->
+  <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+    <!-- Item 1 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+      <img src="assets/img/bg-home1.jpg"
+        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+    </div>
+    <!-- Item 2 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+      <img src="assets/img/bg-home2.jpg"
+        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+    </div>
+  </div>
+  <!-- Slider indicators -->
+  <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+    <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
+      data-carousel-slide-to="0"></button>
+    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
+      data-carousel-slide-to="1"></button>
+  </div>
+  <!-- Slider controls -->
+  <button type="button"
+    class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+    data-carousel-prev>
+    <span
+      class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+      <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
+      </svg>
+      <span class="sr-only">Previous</span>
+    </span>
+  </button>
+  <button type="button"
+    class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+    data-carousel-next>
+    <span
+      class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+      <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+      </svg>
+      <span class="sr-only">Next</span>
+    </span>
+  </button>
+</div>
+<!-- Hero -->
+
+<div class="mt-10" data-aos="fade-up">
+  <div class=" max-w-screen-lg container mx-auto">
+    <div class="text-center">
+      <h6 class="section-title bg-white text-center text-xl font-medium px-3">
+        Địa điểm
+      </h6>
+      <h1 class="mb-3 text-xl">Điểm đến phổ biến</h1>
+    </div>
+    <div class="">
+      <div *ngIf="listDestinationshot && listDestinationshot.length > 0">
+        <div class="w-full grid grid-cols-4 gap-4">
+          <div *ngFor="let item of listDestinationshot">
+            <a class="flex p-6 rounded-lg shadow-lg border bg-white hover:bg-orange-500 hover:text-white"
+              routerLink="/tour/destinations/{{ item.id }}">
+              <div>
+                <div class=" flex justify-center items-center overflow-hidden" *ngIf="item.image.length > 0">
+                  <img alt="image location" class="rounded-lg"
+                    [src]="'data:image/' + item?.image[0]?.type+ ';base64,' + item?.image[0]?.data" width="100%">
+                </div>
+                <div class="flex justify-center items-center" *ngIf="item.image.length === 0">
+                  <img alt="noimg" class="rounded-lg" src="assets/img/noIMG.jpg" width="100%" />
+                </div>
+                <div class="mt-3 text-center">
+                  <span class="">{{ item.name }}</span><br>
+                  <span class="">{{item.province}}</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-10" data-aos="fade-up">
+  <div class=" max-w-screen-lg container mx-auto">
+    <div class="text-center">
+      <h6 class="section-title bg-white text-center text-xl font-medium px-3">
+        Danh sách tour
+      </h6>
+      <h1 class="mb-3 text-xl">Top gói tour</h1>
+    </div>
+    <div class=" grid grid-cols-4 gap-4">
+      <div class="" *ngFor="let item of listTour | paginate : { itemsPerPage: 4, currentPage: p }">
+        <div class=" relative">
+          <a class=" block h-500px rounded-lg shadow-lg border bg-white overflow-hidden hover:bg-orange-500 hover:text-white hover:duration-75"
+            style="height: 450px;" routerLink="/tour/destinations/{{ item.id }}">
+            <div class="w-full overflow-hidden" style="height: 200px;">
+              <div *ngIf="item.images.length > 0">
+                <img class="img-fluid rounded-lg"
+                  [src]="'data:image/' + item.images[0]?.type+ ';base64,' + item.images[0]?.data" width="100%">
+              </div>
+              <div *ngIf="item.images.length === 0">
+                <img alt="noimg" class="rounded-lg" src="assets/img/noIMG.jpg" width="100%" />
+              </div>
+            </div>
+            <div class="px-2 flex flex-col items-start">
+              <small class="">
+                <i class="fa fa-map-marker-alt text-primary"></i>
+                {{ item.destinations.name }} {{ item.destinations.province }}
+              </small>
+              <span class="text-lg font-bold">{{ item.name }}</span>
+              <div class="flex items-center gap-2">
+                <div class="mb-3 text-yellow-400">
+                  <small class="fa fa-star text-primary"></small>
+                  <small class="fa fa-star text-primary"></small>
+                  <small class="fa fa-star text-primary"></small>
+                  <small class="fa fa-star text-primary"></small>
+                  <small class="fa fa-star text-primary"></small>
+                </div>
+                <div>
+                  <small class="">
+                    <i class="fa fa-user"></i>{{item.participantsCount }} người đã đặt
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="ps-3 flex justify-start items-center text-sm">
+              <div>
+                <i class="fa fa-calendar-alt text-primary me-2"></i>
+              </div>
+              <div class="flex flex-col">
+                <span>Ngày bắt đầu: {{ item.startDate | date : "dd/MM/yyyy" }}</span>
+                <span>Ngày kết thúc: {{ item.endDate | date : "dd/MM/yyyy" }}</span>
+              </div>
+            </div>
+            <div class="text-center mt-2">
+              <h3 class="mb-0">{{ item.price | currency }}</h3>
+            </div>
+          </a>
+          <div class="w-full absolute bottom-2">
+            <ul class=" flex justify-between p-2">
+              <li>
+                <a href="javascript:void(0)" class=" px-4 py-2" (click)="addToWishList(item)"><fa-icon
+                    [icon]="heart"></fa-icon></a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" class="bg-green-400 text-white shadow-lg rounded-lg px-4 py-2"
+                  (click)="addToCart(item)">thêm vô giỏ hàng</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 py-2 shadow-lg rounded-lg flex justify-center items-center">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
+
+<div class="mt-10 pt-10 border-t-2">
+  <div class=" max-w-screen-lg container mx-auto">
+    <div class="text-center">
+      <h6 class="section-title bg-white text-center text-xl font-medium px-3">
+        Services
+      </h6>
+      <h1 class="mb-3 text-xl">Dịch vụ của chúng tôi</h1>
+    </div>
+    <div class=" grid grid-cols-4 gap-4">
+      <div class="" *ngFor="let item of listService | paginate: {itemsPerPage:8, currentPage: p}">
+        <div class="">
+          <div class="px-3 py-5  bg-white shadow-lg rounded-lg border hover:bg-green-500 hover:text-white"
+            routerLink="/service/{{item.id}}" style="height: 200px;">
+            <div class="flex justify-center">
+              <i class="fa fa-3x fa-globe"></i>
+            </div>
+            <div>
+              <h5 class="font-bold text-center text-lg pb-3">{{item.name}}</h5>
+            </div>
+            <div>
+              <p>Mô tả: {{item.description}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 flex justify-center items-center">
+      <pagination-controls (pageChange)="p =  $event"></pagination-controls>
+    </div>
+  </div>
+</div>
+
+<div class="mt-10 pt-10 border-t-2">
+  <div class=" max-w-screen-lg container mx-auto">
+    <div class="text-center">
+      <h6 class="section-title bg-white text-center text-xl font-medium px-3">
+        Hướng dẫn viên du lịch
+      </h6>
+      <h1 class="mb-3 text-xl">gặp các hướng dẫn viên của chúng tôi</h1>
+    </div>
+    <div class=" grid grid-cols-4 gap-4">
+      <div class="team-item pb-3 rounded-lg shadow-lg overflow-hidden">
+        <div class="overflow-hidden">
+          <img class="img-fluid" src="assets/img/team-1.jpg" alt="people">
+        </div>
+        <div class="text-center p-2">
+          <p class="text-xl font-bold">Full Name</p>
+          <small>Designation</small>
+        </div>
+        <div class="flex justify-around">
+          <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+          <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
+          <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="team-item pb-3 rounded-lg shadow-lg overflow-hidden">
+        <div class="overflow-hidden">
+          <img class="img-fluid" src="assets/img/team-2.jpg" alt="people">
+        </div>
+        <div class="text-center p-2">
+          <p class="text-xl font-bold">Full Name</p>
+          <small>Designation</small>
+        </div>
+        <div class="flex justify-around">
+          <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+          <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
+          <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="team-item pb-3 rounded-lg shadow-lg overflow-hidden">
+        <div class="overflow-hidden">
+          <img class="img-fluid" src="assets/img/team-3.jpg" alt="">
+        </div>
+        <div class="text-center p-2">
+          <p class="text-xl font-bold">Full Name</p>
+          <small>Designation</small>
+        </div>
+        <div class="flex justify-around">
+          <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+          <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
+          <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="team-item pb-3 rounded-lg shadow-lg overflow-hidden">
+        <div class="overflow-hidden">
+          <img class="img-fluid" src="assets/img/team-4.jpg" alt="">
+        </div>
+        <div class="text-center p-2">
+          <p class="text-xl font-bold">Full Name</p>
+          <small>Designation</small>
+        </div>
+        <div class="flex justify-around">
+          <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+          <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
+          <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

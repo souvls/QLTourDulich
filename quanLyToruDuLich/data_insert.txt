@@ -1,0 +1,160 @@
+use quanlytourdulich;
+INSERT INTO `role` VALUES (1,'ROLE_USER'),(2,'ROLE_MODERATOR'),(3,'ROLE_ADMIN');
+INSERT INTO `user` VALUES (1,NULL,NULL,'admin@gmail.com',_binary '\0',NULL,NULL,'$2a$10$vubZL8rZ5SH8zOzp0AKO8.iYXau5myRcfuPpzzGsEe6FcAFcPgvwO',NULL,NULL,'admin11',NULL),
+							(2,NULL,NULL,'admin11@gmail.com',_binary '\0',NULL,NULL,'$2a$10$vubZL8rZ5SH8zOzp0AKO8.iYXau5myRcfuPpzzGsEe6FcAFcPgvwO',NULL,NULL,'admin',NULL);
+INSERT INTO `user` VALUES (3,NULL,NULL,'admin111@gmail.com',_binary '\0',NULL,NULL,'$2a$10$vubZL8rZ5SH8zOzp0AKO8.iYXau5myRcfuPpzzGsEe6FcAFcPgvwO',NULL,NULL,'admin1',NULL);
+
+
+INSERT INTO `user_roles` VALUES (1,1),(2,3);
+
+
+INSERT INTO `quanlytourdulich`.`destinations` (`id`, `description`, `name`, `province`) 
+VALUES 
+('1', 'địa điểm săn mây', 'núi bà chè', 'bạc liêu'),
+('2', 'Địa điểm đẹp ở Núi Bà Chè', 'Núi Bà Chè', 'Bạc Liêu'),
+('3', 'Thành phố Hồ Chí Minh', 'Thành phố Hồ Chí Minh', 'Thành phố Hồ Chí Minh'),
+('4', 'Bãi biển Mỹ Khê', 'Đà Nẵng', 'Đà Nẵng'),
+('5', 'Khu di tích Cố đô Huế', 'Huế', 'Thừa Thiên Huế'),
+('6', 'Bãi biển Nha Trang', 'Nha Trang', 'Khánh Hòa'),
+('7', 'Vịnh Hạ Long', 'Hạ Long', 'Quảng Ninh'),
+('8', 'Thành phố Đà Lạt', 'Đà Lạt', 'Lâm Đồng'),
+('9', 'Chợ Bến Thành', 'Thành phố Hồ Chí Minh', 'Thành phố Hồ Chí Minh'),
+('10', 'Làng Đại học Cần Thơ', 'Cần Thơ', 'Cần Thơ'),
+('11', 'Phố cổ Hội An', 'Hội An', 'Quảng Nam'),
+('12', 'Thác Pongour', 'Đà Lạt', 'Lâm Đồng'),
+('13', 'Bảo tàng Dân dụ nghệ thuật Cần Thơ', 'Cần Thơ', 'Cần Thơ'),
+('14', 'Công viên Văn hóa Dam Sen', 'Thành phố Hồ Chí Minh', 'Thành phố Hồ Chí Minh'),
+('15', 'Bãi biển Cửa Đại', 'Hội An', 'Quảng Nam'),
+('16', 'Chợ Đà Lạt', 'Đà Lạt', 'Lâm Đồng'),
+('17', 'Lăng Chủ tịch Hồ Chí Minh', 'Thành phố Hồ Chí Minh', 'Thành phố Hồ Chí Minh'),
+('18', 'Vịnh Cam Ranh', 'Cam Ranh', 'Khánh Hòa'),
+('19', 'Đỉnh núi Fansipan', 'Sa Pa', 'Lào Cai'),
+('20', 'Khu du lịch sinh thái Suối Voi', 'Cần Thơ', 'Cần Thơ');
+
+
+
+INSERT INTO `quanlytourdulich`.`tour` 
+(`id`, `end_date`, `name`, `participants_count`, `price`, `start_date`, `status`, `destinations_id`) 
+VALUES 
+(1, '2025-02-25 00:00:00', 'Sapa Adventure', '18', '9000', '2025-02-10 00:00:00', 'active', '15'),
+(2, '2025-03-01 01:30:00', 'Đà Nẵng Culinary Tour', '25', '8000', '2025-02-15 01:30:00', 'inactive', '3'),
+(3, '2025-03-05 02:00:00', 'Hội An Beach Getaway', '20', '7500', '2025-02-20 02:00:00', 'active', '4'),
+(4, '2025-03-10 03:30:00', 'Cần Giờ Mangrove Discovery', '15', '7000', '2025-02-25 03:30:00', 'inactive', '16'),
+(5, '2025-03-15 04:00:00', 'Ninh Bình Countryside Retreat', '28', '11000', '2025-03-01 04:00:00', 'active', '17'),
+(6, '2025-03-20 05:30:00', 'Vũng Tàu Scuba Diving', '22', '9500', '2025-03-05 05:30:00', 'inactive', '12'),
+(7, '2025-03-25 06:00:00', 'Mũi Né Sand Sledding', '30', '12000', '2025-03-10 06:00:00', 'active', '10'),
+(8, '2025-03-30 07:30:00', 'Đà Lạt Flower Festival', '18', '8500', '2025-03-15 07:30:00', 'inactive', '8'),
+(9, '2025-04-05 08:00:00', 'Hồ Gươm Kayaking', '25', '10000', '2025-03-20 08:00:00', 'active', '1'),
+(10, '2025-04-10 09:30:00', 'Cần Thơ Floating Markets', '20', '8000', '2025-03-25 09:30:00', 'inactive', '11'),
+(11, '2025-04-15 10:00:00', 'Hải Phòng Night Market', '15', '7500', '2025-03-30 10:00:00', 'active', '18'),
+(12, '2025-04-20 11:30:00', 'Nha Trang Island Hopping', '28', '11000', '2025-04-05 11:30:00', 'inactive', '5'),
+(13, '2025-04-25 12:00:00', 'Sài Gòn Street Food Tour', '22', '9500', '2025-04-10 12:00:00', 'active', '2'),
+(14, '2025-04-30 13:30:00', 'Huế Imperial City Exploration', '30', '12000', '2025-04-15 13:30:00', 'inactive', '9'),
+(15, '2025-05-05 14:00:00', 'Phan Thiết Sand Sculpture Festival', '18', '8500', '2025-04-20 14:00:00', 'active', '10'),
+(16, '2025-05-10 15:30:00', 'Cô Tô Island Adventure', '25', '10000', '2025-04-25 15:30:00', 'inactive', '19'),
+(17, '2025-05-15 16:00:00', 'Hạ Long Bay Cruise', '20', '8000', '2025-05-01 16:00:00', 'active', '7'),
+(18, '2025-05-20 17:30:00', 'Đồng Tháp Lotus Fields', '15', '7500', '2025-05-05 17:30:00', 'inactive', '13'),
+(19, '2025-05-25 18:00:00', 'Mộc Châu Tea Plantations', '28', '11000', '2025-05-10 18:00:00', 'active', '20'),
+(20, '2025-05-30 19:30:00', 'Hồ Cốc Beach Retreat', '22', '9500', '2025-05-15 19:30:00', 'inactive', '20');
+
+
+
+INSERT INTO `quanlytourdulich`.`service` (`id`, `description`, `name`, `price`, `tour_id`) VALUES
+(1, 'Dịch vụ spa cao cấp, mang lại trải nghiệm thư giãn tuyệt vời cho du khách.', 'spa', '3000', '2'),
+(2, 'Dịch vụ cho thuê xe máy, giúp du khách dễ dàng di chuyển và khám phá địa điểm.', 'thuê xe máy', '2000', '3'),
+(3, 'Hướng dẫn viên tận tâm, am hiểu về địa điểm, sẽ là người bạn đồng hành tuyệt vời cho hành trình của bạn.', 'hướng dẫn viên', '4000', '4'),
+(4, 'Dịch vụ vận chuyển thoải mái và an toàn, đảm bảo cho hành trình của bạn.', 'vận chuyển', '2500', '5'),
+(5, 'Buổi hướng dẫn thực hành nấu ăn, để bạn có cơ hội trải nghiệm ẩm thực độc đáo của địa phương.', 'nấu ăn', '3500', '6'),
+(6, 'Dịch vụ cho thuê thiết bị lướt sóng, thỏa sức tận hưởng niềm vui trên biển cả.', 'thuê lướt sóng', '2800', '7'),
+(7, 'Dịch vụ chụp hình chuyên nghiệp, ghi lại những khoảnh khắc đáng nhớ trong chuyến đi của bạn.', 'chụp hình', '4200', '8'),
+(8, 'Dịch vụ hướng dẫn du lịch địa phương, giúp bạn hiểu rõ hơn về văn hóa và lịch sử địa điểm.', 'hướng dẫn du lịch', '3200', '9'),
+(9, 'Buổi biểu diễn âm nhạc truyền thống, mang đến trải nghiệm văn hóa độc đáo.', 'âm nhạc truyền thống', '3800', '10'),
+(10, 'Dịch vụ chăm sóc sức khỏe, đảm bảo sự thoải mái và an toàn cho du khách.', 'chăm sóc sức khỏe', '3000', '11'),
+(11, 'Buổi tham quan các điểm thắng cảnh nổi tiếng với hướng dẫn viên tận tâm.', 'tham quan điểm thắng cảnh', '2600', '12'),
+(12, 'Dịch vụ mát-xa chuyên nghiệp, giúp bạn thư giãn sau những hoạt động khám phá.', 'mát-xa', '3200', '13'),
+(13, 'Buổi tập thể dục buổi sáng, giúp du khách bắt đầu ngày mới tràn đầy năng lượng.', 'tập thể dục buổi sáng', '2800', '14'),
+(14, 'Dịch vụ cho thuê thiết bị đua thuyền kayak, trải nghiệm động lực trên mặt nước.', 'thuê kayak', '3500', '15'),
+(15, 'Buổi thử nghiệm rượu vang địa phương, khám phá hương vị đặc trưng của vùng.', 'thử nghiệm rượu vang', '4000', '16'),
+(16, 'Dịch vụ massage truyền thống, giúp du khách giảm stress và thư giãn tối đa.', 'massage truyền thống', '3000', '17'),
+(17, 'Buổi học làm nến thủ công, tạo ra những sản phẩm độc đáo làm quà lưu niệm.', 'làm nến thủ công', '2700', '18'),
+(18, 'Dịch vụ cho thuê thiết bị lặn, khám phá đại dương và động vật biển đa dạng.', 'thuê thiết bị lặn', '3800', '19'),
+(19, 'Buổi biểu diễn nghệ thuật đương đại, mang đến trải nghiệm nghệ thuật độc đáo.', 'biểu diễn nghệ thuật', '3200', '20'),
+(20, 'Dịch vụ làm đẹp và spa, giúp du khách thư giãn và làm đẹp từ bên trong.', 'làm đẹp và spa', '4500', '20');
+
+
+
+INSERT INTO `quanlytourdulich`.`reviews` (`id`, `description`, `name`, `rating`, `tour_id`, `user_id`) VALUES
+('1', 'qua hấp dẫn', 'ngô đức nhất', '4', '1', '1'),
+(2, 'Trải nghiệm tuyệt vời, đặc biệt là cảm giác khi đến với đỉnh núi.', 'Trần Thị Hương', '5', '1', '1'),
+(3, 'Tour rất thú vị và hấp dẫn, tôi đã có những kỷ niệm đáng nhớ.', 'Nguyễn Văn An', '4', '1', '2'),
+(4, 'Nhóm hướng dẫn rất chuyên nghiệp, giúp chúng tôi có một chuyến đi an toàn và thú vị.', 'Lê Thị Bích Phương', '5', '2', '1'),
+(5, 'Địa điểm đẹp, đội ngũ nhân viên phục vụ tận tình, tạo nên một chuyến đi tuyệt vời.', 'Nguyễn Minh Đức', '4', '2', '2'),
+(6, 'Khám phá những ngôi đền cổ kính, tôi đã học được nhiều về lịch sử văn hóa.', 'Vũ Thị Hoa', '5', '3', '1'),
+(7, 'Dịch vụ đẳng cấp, tôi cảm thấy hài lòng với giá trị mà tour mang lại.', 'Phạm Văn Tuấn', '4', '3', '2'),
+(8, 'Hòa mình vào thiên nhiên hoang sơ, trải nghiệm không gì sánh kịp.', 'Trương Minh Tuấn', '5', '4', '1'),
+(9, 'Thực sự tuyệt vời, từ ẩm thực đến văn hóa, mọi thứ đều xuất sắc.', 'Nguyễn Thị Linh', '4', '4', '2'),
+(10, 'Cảm ơn đội ngũ hướng dẫn, họ đã tận tâm giúp đỡ từng du khách.', 'Lê Đình Hoàng', '5', '5', '1'),
+(11, 'Đến những bãi biển hoang sơ, tận hưởng không khí trong lành, tuyệt vời.', 'Trần Minh Tuấn', '4', '5', '2'),
+(12, 'Lịch trình chặt chẽ, không gian ấm cúng, tôi đã thực sự thư giãn.', 'Phạm Thị Hương', '5', '6', '1'),
+(13, 'Những trải nghiệm mới lạ, tôi đã khám phá nhiều điều thú vị.', 'Nguyễn Văn Đức', '4', '6', '2'),
+(14, 'Đến núi lửa, tận hưởng cảm giác thách thức và phấn khích.', 'Vũ Thị Mai', '5', '7', '1'),
+(15, 'Tham gia các hoạt động lặn, tôi được nhìn thấy vẻ đẹp dưới đáy biển.', 'Nguyễn Hữu Dương', '4', '7', '2'),
+(16, 'Những bức tranh tự nhiên tại đồng cỏ đầy hoa, tôi không thể nào quên được.', 'Phan Thị Nga', '5', '8', '1'),
+(17, 'Thưởng thức ẩm thực độc đáo, tận hưởng mỗi bữa ăn như một trải nghiệm.', 'Lê Văn Anh', '4', '8', '2'),
+(18, 'Khám phá văn hóa địa phương, tôi cảm thấy như mình là một phần của cộng đồng.', 'Nguyễn Thị Thảo', '5', '9', '1'),
+(19, 'Chìm đắm trong không gian yên bình của các vườn trà, trải nghiệm tuyệt vời.', 'Vũ Minh Tuấn', '4', '9', '2'),
+(20, 'Dịch vụ massage tuyệt vời, giúp tôi thư giãn sau mỗi ngày thám hiểm.', 'Trần Văn Nam', '5', '10', '1');
+
+
+
+SELECT * FROM quanlytourdulich.destinations_image;
+INSERT INTO quanlytourdulich.destinations_image (destinations_id, image_id)
+VALUES
+  (1, ROUND(1 + RAND())),
+  (2, ROUND(1 + RAND())),
+  (3, ROUND(1 + RAND())),
+  (4, ROUND(1 + RAND())),
+  (5, ROUND(1 + RAND())),
+  (6, ROUND(1 + RAND())),
+  (7, ROUND(1 + RAND())),
+  (8, ROUND(1 + RAND())),
+  (9, ROUND(1 + RAND())),
+  (10, ROUND(1 + RAND())),
+  (11, ROUND(1 + RAND())),
+  (12, ROUND(1 + RAND())),
+  (13, ROUND(1 + RAND())),
+  (14, ROUND(1 + RAND())),
+  (15, ROUND(1 + RAND())),
+  (16, ROUND(1 + RAND())),
+  (17, ROUND(1 + RAND())),
+  (18, ROUND(1 + RAND())),
+  (19, ROUND(1 + RAND())),
+  (20, ROUND(1 + RAND()));
+
+
+
+SELECT * FROM quanlytourdulich.tour_image;
+-- Thêm 20 bản ghi mới vào bảng của bạn
+INSERT INTO quanlytourdulich.tour_image (tour_id, image_id)
+VALUES
+  (1, ROUND(1 + RAND())),
+  (2, ROUND(1 + RAND())),
+  (3, ROUND(1 + RAND())),
+  (4, ROUND(1 + RAND())),
+  (5, ROUND(1 + RAND())),
+  (6, ROUND(1 + RAND())),
+  (7, ROUND(1 + RAND())),
+  (8, ROUND(1 + RAND())),
+  (9, ROUND(1 + RAND())),
+  (10, ROUND(1 + RAND())),
+  (11, ROUND(1 + RAND())),
+  (12, ROUND(1 + RAND())),
+  (13, ROUND(1 + RAND())),
+  (14, ROUND(1 + RAND())),
+  (15, ROUND(1 + RAND())),
+  (16, ROUND(1 + RAND())),
+  (17, ROUND(1 + RAND())),
+  (18, ROUND(1 + RAND())),
+  (19, ROUND(1 + RAND())),
+  (20, ROUND(1 + RAND()));
+ 

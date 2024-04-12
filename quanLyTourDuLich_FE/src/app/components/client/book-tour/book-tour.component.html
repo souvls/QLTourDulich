@@ -1,0 +1,154 @@
+<div class="mt-10 pt-10" data-aos="fade-up">
+  <div class=" max-w-screen-lg container mx-auto">
+    <div class="text-center">
+      <h6 class="section-title bg-white text-center text-xl font-medium px-3">
+        CHECK out
+      </h6>
+    </div>
+    <div>
+      <h3>những sản phẩm được chọn</h3>
+      <table class="w-full table-auto">
+        <thead>
+          <tr class="border">
+            <th>Tour</th>
+            <th>Giá</th>
+            <th>số lượng</th>
+            <th>dịch vụ</th>
+            <th>tổng giá</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border" *ngFor="let product of cartService.items">
+            <td class="p-2">
+              <div class="flex justify-center items-center">
+                <img class="img-fluid rounded-lg" alt="Tour cover"
+                  [src]="'data:image/' + product.images[0]?.type+ ';base64,' + product.images[0]?.data" width="80px">
+              </div>
+              <h5 class="text-center">{{ product.name }}</h5>
+            </td>
+            <td class="text-center">
+              {{ product.price.toLocaleString() }} VND
+            </td>
+            <td class="text-center">
+              {{product.quantity}}
+            </td>
+
+            <td class="">
+              <ng-container *ngIf="(cartService.getServicesForTour(product.id) | async) as services">
+                <ng-container *ngIf="services.length > 0; else noServices">
+                  <h4 class="">Danh sách dịch vụ đã chọn</h4>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>STT</th>
+                        <th>Tên Dịch Vụ</th>
+                        <th>Giá</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let service of services; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ service.name }}</td>
+                        <td>{{ service.price }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </ng-container>
+                <ng-template #noServices>
+                  <p>Không có dịch vụ đi kèm</p>
+                </ng-template>
+              </ng-container>
+            </td>
+            
+            <td class="text-center">
+              {{ product.subTotal.toLocaleString()}} VND
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="w-full mt-4 flex justify-end">
+        <div>
+          <h1>CHI TIẾT GIỎ HÀNG ĐÃ ĐẶT</h1>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="">
+                <h5>Mã giảm giá : </h5>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="">
+                <ul>
+                  <li>
+                    tổng giá giỏ hàng
+                    <span>{{ cartService.totalPrice.toLocaleString() }} VND</span>
+                  </li>
+                  <li>giảm giá <span>- 0%</span></li>
+                  <li>
+                    tổng giá phiếu<span>{{ cartService.total.toLocaleString() }} VND</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mt-10 pt-10 relative" data-aos="fade-up">
+  <div class="">
+    <img alt="backgound" src="assets/img/booking.jpg" width="100%" />
+  </div>
+  <div class="w-full absolute top-3">
+    <div class=" max-w-screen-lg container mx-auto">
+      <div class="text-center text-white">
+        <h1 class="pt-5">Đặt tour online</h1>
+        <p class="mb-4">
+          vui lòng điền đủ thông tin để chúng tôi tiếp tục phụ vụ bạn!
+        </p>
+        <p class="mb-4">
+          khi ấn đặt ngay thì hãy check tin nhắn của chúng tôi đã gửi cho bạn nhằm mục đích xác thực thông tin đặt
+          hàng tránh giả mạo và hành vi không đúng với chúng tôi. Xin cảm ơn
+        </p>
+      </div>
+      <div class="">
+        <h1 class="text-white mb-4">ĐẶT TOUR NGAY</h1>
+        <form>
+          <div class=" flex flex-col gap-4">
+            <div class="">
+              <div class="">
+                <input type="text" class=" outline-white rounded-lg" id="name" placeholder="Your Name"
+                  [(ngModel)]="FormTourBooking.yourName" name="yourName" />
+              </div>
+            </div>
+            <div class="">
+              <div class="">
+                <input type="email" class=" outline-white rounded-lg" id="email" placeholder="Your Email"
+                  [(ngModel)]="FormTourBooking.yourEmail" name="yourEmail" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating date" id="date3" data-target-input="nearest">
+                <input type="date" class=" outline-white rounded-lg" id="datetime"
+                  placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker"
+                  [(ngModel)]="FormTourBooking.time" name="time" />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-floating">
+                <textarea class=" outline-white rounded-lg" placeholder="Special Request" id="message"
+                  style="height: 100px" [(ngModel)]="FormTourBooking.spectialRequest" name="spectialRequest"></textarea>
+              </div>
+            </div>
+            <div class="">
+              <button class="bg-green-500 P-3 text-white rounded-lg mt-4" type="submit" (click)="booking()">
+                ĐẶT NGAY
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

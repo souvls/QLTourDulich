@@ -1,0 +1,75 @@
+/* Định dạng breadcrumb-section */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.breadcrumb-section {
+    padding: 50px 0;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.breadcrumb__text {
+    margin-bottom: 15px;
+}
+
+.breadcrumb__option a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Định dạng user section */
+.user {
+    padding: 50px 0;
+}
+
+/* Định dạng button */
+.user button {
+    padding: 10px 25px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.user button:hover {
+    background-color: #0056b3;
+}
+
+/* Định dạng các label và input field */
+.labels {
+    margin-bottom: 8px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Định dạng profile-button */
+.profile-button {
+    padding: 10px 25px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.profile-button:hover {
+    background-color: #0056b3;
+}

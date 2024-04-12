@@ -1,0 +1,180 @@
+/* Phần tử chính */
+.tour-details {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Phần tử section trong form */
+.form-section {
+    margin-bottom: 20px;
+}
+
+/* Các trường thông tin */
+.field {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+    width: calc(100% - 10px);
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Nút */
+.actions button {
+    margin-right: 10px;
+}
+
+.cancel-button {
+    background-color: #ff6666;
+    color: #fff;
+}
+
+/* Dialog */
+.custom-dialog {
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.dialog-header {
+    margin-bottom: 10px;
+}
+
+.dialog-content {
+    /* Thiết lập kiểu hiển thị, padding, margin cho nội dung dialog */
+}
+
+/* Danh sách ảnh */
+.image-list {
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.image-list h1 {
+    margin-bottom: 10px;
+}
+
+/* Ảnh đã chọn */
+.product-image {
+    margin-bottom: 10px;
+}
+
+.product-image img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+
+/* Nút xóa ảnh */
+.delete-image {
+    margin-left: 5px;
+}
+
+
+
+
+
+
+
+
+
+/* CSS cho danh sách hình ảnh */
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .list-image {
+    width: calc(25% - 10px);
+    height: auto;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    box-sizing: border-box;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .list-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .custom-button {
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+
+
+
+  /* Định dạng các phần tử container chứa ảnh đã chọn */
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Khoảng cách giữa các phần tử */
+  }
+  
+  /* Định dạng phần tử chứa mỗi ảnh đã chọn */
+  .tour-image {
+    position: relative; /* Tạo vị trí tương đối để dễ dàng định vị nút xóa */
+    width: calc(50% - 10px); /* Độ rộng cho 2 cột trong một hàng (trừ khoảng cách giữa chúng) */
+    margin-bottom: 10px; /* Khoảng cách dưới của mỗi phần tử */
+  }
+  
+  /* Định dạng ảnh */
+  .tour-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+  }
+  
+  /* Nút xóa ảnh */
+  .delete-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: red; /* Màu nền của nút xóa */
+    color: white; /* Màu chữ của nút xóa */
+  }
+  
+
+
+
+
+  .image-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .thumbnail {
+    max-width: 100px; /* Điều chỉnh kích thước tối đa của hình ảnh */
+    max-height: 100px;
+    margin: 5px; /* Khoảng cách giữa các hình ảnh */
+  }
+  
+  
